@@ -7,6 +7,7 @@ use App\Repository\AdRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Ad;
 
 class AdController extends AbstractController
 {
@@ -30,15 +31,10 @@ class AdController extends AbstractController
      *
      * @Route("/ads/{slug}", name="ads_show")
      *
-     * @param $slug
-     * @param AdRepository $repo
      * @return Response
      */
-    public function show($slug, AdRepository $repo) {
+    public function show(Ad $ad) {
 
-        // Je récupère l'annonce qui correspond au slug
-
-        $ad = $repo->findOneBySlug($slug);
 
         return $this->render ('ad/show.html.twig', [
             'ad' => $ad,
